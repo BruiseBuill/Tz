@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BF
+namespace BF.Object
 {
 	public abstract class BaseComponent : MonoBehaviour
 	{

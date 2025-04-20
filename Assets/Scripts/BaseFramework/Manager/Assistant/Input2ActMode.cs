@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BF.Tool
+namespace BF
 {
 	public abstract class Input2ActMode : ScriptableObject
 	{

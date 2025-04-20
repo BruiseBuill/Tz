@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace BF 
 {
-    public enum KeyCondition { Down, Up ,Press}
+    
 }
 
 

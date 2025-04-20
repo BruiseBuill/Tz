@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BF 
+namespace BF
 {
     public class PoolManager : Single<PoolManager>
     {

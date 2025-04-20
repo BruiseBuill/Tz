@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BF
+namespace BF.EventChannel
 {
     public class GenericEventChannel<T, T1> : ScriptableObject
     {

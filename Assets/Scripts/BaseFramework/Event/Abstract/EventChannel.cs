@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace BF
+namespace BF.EventChannel
 {
 	[CreateAssetMenu(fileName = "EventChannel", menuName = "BF/EventChannel")]
 	public class EventChannel : ScriptableObject

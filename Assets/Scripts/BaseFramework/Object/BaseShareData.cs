@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace BF
+namespace BF.Object
 {
 	public class BaseShareData : MonoBehaviour
 	{

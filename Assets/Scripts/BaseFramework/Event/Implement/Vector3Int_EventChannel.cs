@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BF
+namespace BF.EventChannel
 {
     [CreateAssetMenu(fileName = "EventChannel", menuName = "BF/GenericEventChannel/vector3Int")]
     public class Vector3Int_EventChannel : GenericEventChannel<Vector3Int>
