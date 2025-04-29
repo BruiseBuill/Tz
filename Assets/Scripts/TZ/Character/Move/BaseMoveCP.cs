@@ -8,6 +8,5 @@ namespace TZ.Character.Move
     {
         public abstract void Move(Vector3 orient);
         public abstract void StopMove();
-
     }
 }

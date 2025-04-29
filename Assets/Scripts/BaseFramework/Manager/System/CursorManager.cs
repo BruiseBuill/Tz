@@ -18,6 +18,7 @@ namespace BF
         void LoadAct(int index)
 		{
 			actModeList[lastActModeIndex].UnSetActMode();
+			InputManager.Instance().ClearKeyDictionary();
 			actModeList[index].SetActMode();
             lastActModeIndex = index;
         }
