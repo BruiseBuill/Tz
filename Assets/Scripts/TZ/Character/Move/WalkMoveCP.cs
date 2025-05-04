@@ -6,10 +6,7 @@ namespace TZ.Character.Move
 {
  	public class WalkMoveCP : BaseMoveCP
 	{
-        [SerializeField] float walkSpeed;
-        [SerializeField] Vector3 inputOrient;
-        [SerializeField] Vector3 worldOrient;
-
+        
         public override void Open()
         {
             
@@ -26,7 +23,5 @@ namespace TZ.Character.Move
         {
             
         }
-
-        
     }
 }

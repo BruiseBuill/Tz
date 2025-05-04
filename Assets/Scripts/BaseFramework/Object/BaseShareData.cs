@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace BF.Object
 {
-	public class BaseShareData : MonoBehaviour
+	public abstract class BaseShareData : MonoBehaviour
 	{
         public DataWithEvent<bool> isAlive;
 		public int _IdentityCode;
@@ -14,35 +14,62 @@ namespace BF.Object
 
         bool isInitialized;
 
-        public virtual void Awake()
+        protected void Awake()
 		{
             isInitialized = true;
             componentList = new Sequece<BaseComponent>();
-		}
-		public virtual void Open()
+            AfterAwake();
+        }
+        public abstract void AfterAwake();
+        
+        public void Open()
 		{
+            SetLocalData();
+            SetDataEventWhenOpen();
+            OpenComponentList();
+        }
+        public void Close()
+        {
+            CloseComponentList();
+            CloseLocalData();
+            CloseDataEvent();
+        }
+        #region Open
+        void SetLocalData()
+        {
+            _IdentityCode++;
             isAlive.ResetData(true);
-
-            isAlive.onValueChange += (alive) => 
+            isAlive.onValueChange += (alive) =>
             {
-                if (!alive) 
+                if (!alive)
                     Close();
             };
-			_IdentityCode++;
-
+        }
+        public abstract void SetDataEventWhenOpen();
+        void OpenComponentList()
+        {
             for (int i = 0; i < componentList.Count; i++)
             {
                 componentList[i].Open();
             }
         }
-		public virtual void Close()
-		{
-            for (int i = componentList.Count; i >= 0; i--) 
+        #endregion
+        
+        #region Close
+        void CloseComponentList()
+        {
+            for (int i = componentList.Count; i >= 0; i--)
             {
                 componentList[i].Close();
             }
+        }
+        void CloseLocalData()
+        {
             isAlive.onValueChange = delegate { };
         }
+        public abstract void CloseDataEvent();
+        #endregion
+
         public void Register(BaseComponent component, int priority)
         {
             if (!isInitialized)
