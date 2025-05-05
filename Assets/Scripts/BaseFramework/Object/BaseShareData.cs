@@ -8,9 +8,12 @@ namespace BF.Object
 {
 	public abstract class BaseShareData : MonoBehaviour
 	{
+        public Action onCloseControl = delegate { };
+
         public DataWithEvent<bool> isAlive;
 		public int _IdentityCode;
         public Sequece<BaseComponent> componentList;
+        
 
         bool isInitialized;
 
@@ -20,6 +23,9 @@ namespace BF.Object
             componentList = new Sequece<BaseComponent>();
             AfterAwake();
         }
+        /// <summary>
+        /// 对一些值进行初始化
+        /// </summary>
         public abstract void AfterAwake();
         
         public void Open()
@@ -52,6 +58,9 @@ namespace BF.Object
                     Close();
             };
         }
+        /// <summary>
+        /// 对每一次激活都需要重新赋值的数据进行初始化,并且挂载相应的依赖
+        /// </summary>
         public abstract void SetDataEventWhenOpen();
         void OpenComponentList()
         {
@@ -74,6 +83,9 @@ namespace BF.Object
         {
             isAlive.onValueChange = delegate { };
         }
+        /// <summary>
+        /// 清空事件解除依赖
+        /// </summary>
         public abstract void CloseDataEvent();
         #endregion
 

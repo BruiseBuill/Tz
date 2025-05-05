@@ -1,9 +1,17 @@
 ﻿using System;
 using UnityEngine;
+using BF.Object;
 
-namespace TZ.SceneOBJ.Character
+namespace TZ.Character.Control
 {
-    class PlayerControl
+    public class PlayerControl : BaseCharacterControl
+    {
+        public override void Initialize<T>(T para)
+        {
+            
+        }
+    }
+    class PlayerInit : ControlInit
     {
 
     }

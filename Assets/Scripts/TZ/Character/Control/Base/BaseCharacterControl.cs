@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using BF.Object;
 
-namespace TZ.SceneOBJ.Character
+namespace TZ.Character.Control
 {
-    class BaseCharacterControl
+    public abstract class BaseCharacterControl:BaseControl
     {
 
     }

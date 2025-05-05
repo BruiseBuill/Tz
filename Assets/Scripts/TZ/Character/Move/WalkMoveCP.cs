@@ -32,11 +32,13 @@ namespace TZ.Character.Move
             }
             else
             {
+                tween.Kill();
                 tween = DOTween.To(() => moveOrient, (a) => moveOrient = a, characterData.worldOrient.Value, accelerateTime);
             }
         }
         public override void StopMove()
         {
+            tween.Kill();
             tween = DOTween.To(() => moveOrient, (a) => moveOrient = a, Vector3.zero, accelerateTime);
         }
         IEnumerator Moving()

@@ -2,7 +2,6 @@ using BF.EventChannel;
 using System.Collections;
 using System.Collections.Generic;
 using TZ.Utility;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Tz.Character.Data

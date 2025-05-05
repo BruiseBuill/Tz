@@ -18,16 +18,22 @@ namespace BF.Object
 		{
 			data = GetComponentInChildren<BaseShareData>();
 		}
-		public abstract void Initialize<T>(T para) where T : ControlInit;
+
+        /// <summary>
+        /// 传入初始化所需要的参数结构体
+        /// </summary>
+        public abstract void Initialize<T>(T para) where T : ControlInit;
 		public void Open()
 		{
             data.Open();
             gameObject.SetActive(true);
 			data.AfterOpen();
+			data.onCloseControl += Close;
         }
         public override void Close()
         {
-			data.Close();
+            data.onCloseControl -= Close;
+            data.Close();
 			PoolManager.Instance().Recycle(gameObject);
         }
     }
