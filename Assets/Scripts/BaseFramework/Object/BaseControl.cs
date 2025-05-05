@@ -19,6 +19,16 @@ namespace BF.Object
 			data = GetComponentInChildren<BaseShareData>();
 		}
 		public abstract void Initialize<T>(T para) where T : ControlInit;
-		public abstract void Open(); 
-	}
+		public void Open()
+		{
+            data.Open();
+            gameObject.SetActive(true);
+			data.AfterOpen();
+        }
+        public override void Close()
+        {
+			data.Close();
+			PoolManager.Instance().Recycle(gameObject);
+        }
+    }
 }

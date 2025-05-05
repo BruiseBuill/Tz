@@ -28,6 +28,13 @@ namespace BF.Object
             SetDataEventWhenOpen();
             OpenComponentList();
         }
+        public void AfterOpen()
+        {
+            for (int i = 0; i < componentList.Count; i++)
+            {
+                componentList[i].AfterOpen();
+            }
+        }
         public void Close()
         {
             CloseComponentList();

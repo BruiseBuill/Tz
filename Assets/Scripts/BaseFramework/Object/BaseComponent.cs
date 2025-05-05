@@ -14,7 +14,11 @@ namespace BF.Object
             data = GetComponentInChildren<BaseShareData>();
             data.Register(this, priority);
         }
+        /// <summary>此函数将在SetActive true之前调用,用来加载依赖关系</summary>
         public abstract void Open();
+        /// <summary>此函数将在SetActive true之后调用，用来启动协程等</summary>
+        public abstract void AfterOpen();
+        /// <summary>此函数将由Data的Close来调用，之后物体会进入到PoolManager，用来卸载依赖关系</summary>
         public abstract void Close();
     }
 }
