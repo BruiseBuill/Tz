@@ -14,24 +14,27 @@ namespace BF.Object
 		public int _IdentityCode;
         public Sequece<BaseComponent> componentList;
         
-
         bool isInitialized;
 
-        protected void Awake()
+        /// <summary>
+        /// 对于一些只需要初始化内存一次的字段进行初始化
+        /// </summary>
+        protected virtual void Awake()
 		{
             isInitialized = true;
             componentList = new Sequece<BaseComponent>();
-            AfterAwake();
         }
+
         /// <summary>
-        /// 对一些值进行初始化
+        /// 在initialize时调用
         /// </summary>
-        public abstract void AfterAwake();
-        
+        public abstract void Initialize<T>(T para) where T : DataInit;
+
         public void Open()
 		{
             SetLocalData();
             SetDataEventWhenOpen();
+            AddDependence();
             OpenComponentList();
         }
         public void AfterOpen()
@@ -45,7 +48,7 @@ namespace BF.Object
         {
             CloseComponentList();
             CloseLocalData();
-            CloseDataEvent();
+            ClearDependence();
         }
         #region Open
         void SetLocalData()
@@ -59,9 +62,13 @@ namespace BF.Object
             };
         }
         /// <summary>
-        /// 对每一次激活都需要重新赋值的数据进行初始化,并且挂载相应的依赖
+        /// 在open时调用,对每一次激活都需要重新赋值的数据进行初始化
         /// </summary>
         public abstract void SetDataEventWhenOpen();
+        /// <summary>
+        /// 在open时调用,挂载内部和外部的事件依赖
+        /// </summary>
+        public abstract void AddDependence();
         void OpenComponentList()
         {
             for (int i = 0; i < componentList.Count; i++)
@@ -84,9 +91,9 @@ namespace BF.Object
             isAlive.onValueChange = delegate { };
         }
         /// <summary>
-        /// 清空事件解除依赖
+        /// 在close时调用,清空内部和外部的事件依赖
         /// </summary>
-        public abstract void CloseDataEvent();
+        public abstract void ClearDependence();
         #endregion
 
         public void Register(BaseComponent component, int priority)

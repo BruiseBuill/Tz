@@ -1,17 +1,21 @@
 ﻿using System;
 using UnityEngine;
 using BF.Object;
+using TZ.Character.Data;
 
 namespace TZ.Character.Control
 {
     public class PlayerControl : BaseCharacterControl
     {
-        public override void Initialize<T>(T para)
+        PlayerData playerData;
+
+        protected override void Awake()
         {
-            
+            base.Awake();
+            playerData = data as PlayerData;
         }
     }
-    class PlayerInit : ControlInit
+    public class PlayerInit : DataInit
     {
 
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BF.Object
 {
-	public interface ControlInit { }
+	public interface DataInit { }
 
 	public abstract class BaseControl : BaseObject
 	{
@@ -22,8 +22,14 @@ namespace BF.Object
         /// <summary>
         /// 传入初始化所需要的参数结构体
         /// </summary>
-        public abstract void Initialize<T>(T para) where T : ControlInit;
-		public void Open()
+        public void Initialize<T>(T para) where T : DataInit
+        {
+            data.Initialize(para);
+        }
+        /// <summary>
+        /// 通常需要initialize之后再open，直接open将会使用默认的参数
+        /// </summary>
+        public void Open()
 		{
             data.Open();
             gameObject.SetActive(true);

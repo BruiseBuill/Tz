@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tz.Character.Data
+namespace TZ.Character.Data
 {
 	public abstract class BaseCharacterData : BaseShareData
 	{
@@ -14,8 +14,5 @@ namespace Tz.Character.Data
         public DataWithEventHop canMove;
         [SerializeField] public DataWithEvent<Vector3> inputOrient;
         [SerializeField] public DataWithEvent<Vector3> worldOrient;
-
-        
-        
     }
 }

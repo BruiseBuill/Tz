@@ -15,12 +15,20 @@ namespace BF
 			int initialActModeIndex = 0;
 			LoadAct(initialActModeIndex);
         }
+		void UnLoadAct(int index)
+		{
+            actModeList[index].UnSetActMode();
+            InputManager.Instance().ClearKeyDictionary();
+        }
         void LoadAct(int index)
 		{
-			actModeList[lastActModeIndex].UnSetActMode();
-			InputManager.Instance().ClearKeyDictionary();
 			actModeList[index].SetActMode();
             lastActModeIndex = index;
         }
+		public void ChangeAct(int index)
+		{
+			UnLoadAct(lastActModeIndex);
+			LoadAct(index);
+		}
 	}
 }
