@@ -96,8 +96,6 @@ namespace TZ.ScriptableObject
             InputManager.Instance().GetKeyEvent(leftCode, KeyCondition.Up) = delegate { };
             InputManager.Instance().GetKeyEvent(rightCode, KeyCondition.Down) = delegate { };
             InputManager.Instance().GetKeyEvent(rightCode, KeyCondition.Up) = delegate { };
-
-
         }
     }
 }

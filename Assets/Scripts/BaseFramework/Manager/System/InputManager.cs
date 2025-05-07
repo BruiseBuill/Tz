@@ -214,7 +214,7 @@ namespace BF
                     onKey.Invoke();
                     return;
                 }
-                else if(condition == KeyCondition.Up && Input.GetKeyDown(keyCode))
+                else if(condition == KeyCondition.Up && Input.GetKeyUp(keyCode))
                 {
                     onKey.Invoke();
                     return;

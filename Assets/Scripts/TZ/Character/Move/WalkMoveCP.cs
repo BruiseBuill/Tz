@@ -12,6 +12,7 @@ namespace TZ.Character.Move
         [SerializeField] float walkSpeed;
         Tween tween;
 
+        
         public override void Open()
         {
             characterData.worldOrient.onValueChange += Move;

@@ -29,6 +29,7 @@ namespace BF.Object
         /// <summary>
         /// 通常需要initialize之后再open，直接open将会使用默认的参数
         /// </summary>
+        [ContextMenu("Open")]
         public void Open()
 		{
             data.Open();
@@ -36,6 +37,7 @@ namespace BF.Object
 			data.AfterOpen();
 			data.onCloseControl += Close;
         }
+        [ContextMenu("Close")]
         public override void Close()
         {
             data.onCloseControl -= Close;

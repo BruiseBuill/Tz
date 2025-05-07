@@ -9,11 +9,14 @@ namespace BF.Object
         protected BaseShareData data;
         [Tooltip("LowerPriorityWillRunFirst")]
         [SerializeField] protected int priority;
-        protected virtual void Awake()
+
+        protected void Awake()
         {
             data = GetComponentInChildren<BaseShareData>();
             data.Register(this, priority);
+            AfterAwake();
         }
+        protected abstract void AfterAwake();
         /// <summary>此函数将在SetActive true之前调用,用来加载依赖关系</summary>
         public abstract void Open();
         /// <summary>此函数将在SetActive true之后调用，用来启动协程等</summary>

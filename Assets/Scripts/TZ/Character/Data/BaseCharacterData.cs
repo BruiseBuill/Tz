@@ -12,7 +12,9 @@ namespace TZ.Character.Data
 
         [Header("Move")]
         public DataWithEventHop canMove;
-        [SerializeField] public DataWithEvent<Vector3> inputOrient;
-        [SerializeField] public DataWithEvent<Vector3> worldOrient;
+        public DataWithEvent<Vector3> inputOrient = new DataWithEvent<Vector3>();
+        public DataWithEvent<Vector3> worldOrient= new DataWithEvent<Vector3>();
+
+        
     }
 }

@@ -16,6 +16,7 @@ namespace TZ.Character.Data
         }
         public override void SetDataEventWhenOpen()
         {
+            Debug.Log(inputOrient == null);
             inputOrient.ResetData(Vector3.zero);
             worldOrient.ResetData(Vector3.zero);
         }
@@ -36,6 +37,7 @@ namespace TZ.Character.Data
         private void Move(Vector3 orient)
         {
             inputOrient.Value = orient;
+            Debug.Log(3);
         }
     }
 }

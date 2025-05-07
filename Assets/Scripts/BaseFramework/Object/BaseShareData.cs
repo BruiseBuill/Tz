@@ -21,8 +21,11 @@ namespace BF.Object
         /// </summary>
         protected virtual void Awake()
 		{
-            isInitialized = true;
-            componentList = new Sequece<BaseComponent>();
+            if (!isInitialized)
+            {
+                isInitialized = true;
+                componentList = new Sequece<BaseComponent>();
+            }
         }
 
         /// <summary>
@@ -32,13 +35,16 @@ namespace BF.Object
 
         public void Open()
 		{
+            Debug.Log(componentList.Count);
             SetLocalData();
             SetDataEventWhenOpen();
             AddDependence();
             OpenComponentList();
+            Debug.Log(componentList.Count);
         }
         public void AfterOpen()
         {
+            Debug.Log(componentList.Count);
             for (int i = 0; i < componentList.Count; i++)
             {
                 componentList[i].AfterOpen();
@@ -55,11 +61,6 @@ namespace BF.Object
         {
             _IdentityCode++;
             isAlive.ResetData(true);
-            isAlive.onValueChange += (alive) =>
-            {
-                if (!alive)
-                    Close();
-            };
         }
         /// <summary>
         /// 在open时调用,对每一次激活都需要重新赋值的数据进行初始化
@@ -88,7 +89,7 @@ namespace BF.Object
         }
         void CloseLocalData()
         {
-            isAlive.onValueChange = delegate { };
+            
         }
         /// <summary>
         /// 在close时调用,清空内部和外部的事件依赖
@@ -102,10 +103,14 @@ namespace BF.Object
             {
                 Awake();
             }
+            Debug.Log(componentList.Count);
             componentList.Add(component, priority);
+            Debug.Log(componentList.Count);
+            Debug.Log(5);
         }
         public void Unregister(BaseComponent component)
         {
+            Debug.Log(6);
             componentList.Remove(component);
         }
         #region Data
