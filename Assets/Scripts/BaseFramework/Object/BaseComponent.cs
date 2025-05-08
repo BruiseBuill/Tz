@@ -16,6 +16,9 @@ namespace BF.Object
             data.Register(this, priority);
             AfterAwake();
         }
+        /// <summary>
+        /// 此函数将在Awake之后调用,给只需要赋值一次的字段赋值，特别是data对象
+        /// </summary>
         protected abstract void AfterAwake();
         /// <summary>此函数将在SetActive true之前调用,用来加载依赖关系</summary>
         public abstract void Open();
