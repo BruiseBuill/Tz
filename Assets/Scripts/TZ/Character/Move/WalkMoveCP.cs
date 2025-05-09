@@ -11,11 +11,10 @@ namespace TZ.Character.Move
         [SerializeField] protected float accelerateTime;
         [SerializeField] float walkSpeed;
         Tween tween;
-
-        
+ 
         public override void Open()
         {
-            characterData.worldOrient.onValueChange += Move;
+            characterData.inputOrient.onValueChange += Move;
         }
         public override void AfterOpen()
         {
@@ -23,7 +22,7 @@ namespace TZ.Character.Move
         }
         public override void Close()
         {
-            characterData.worldOrient.onValueChange -= Move;
+            characterData.inputOrient.onValueChange -= Move;
         }
         public override void Move(Vector3 orient)
         {
@@ -34,7 +33,7 @@ namespace TZ.Character.Move
             else
             {
                 tween.Kill();
-                tween = DOTween.To(() => moveOrient, (a) => moveOrient = a, characterData.worldOrient.Value, accelerateTime);
+                tween = DOTween.To(() => moveOrient, (a) => moveOrient = a, characterData.inputOrient.Value, accelerateTime);
             }
         }
         public override void StopMove()
@@ -46,7 +45,7 @@ namespace TZ.Character.Move
         {
             while (characterData.canMove.Value)
             {
-                characterData.model.position += moveOrient * walkSpeed * Time.deltaTime;
+                characterData.realPos.Value += moveOrient * walkSpeed * Time.deltaTime;
                 yield return null;
             }
         }

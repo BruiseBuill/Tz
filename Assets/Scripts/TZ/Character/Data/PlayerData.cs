@@ -17,25 +17,20 @@ namespace TZ.Character.Data
         public override void SetDataEventWhenOpen()
         {
             inputOrient.ResetData(Vector3.zero);
-            worldOrient.ResetData(Vector3.zero);
         }
-        public override void AddDependence()
+        public override void AddDependenceEx()
         {
             onMoveChannel.AddListener(Move);
-            inputOrient.onValueChange += (inputOrient) => worldOrient.Value = inputOrient.ToIsoVector();
         }
-        public override void ClearDependence()
+        public override void ClearDependenceEx()
         {
             onMoveChannel.RemoveListener(Move);
-            inputOrient.onValueChange = delegate { };
-            worldOrient.onValueChange = delegate { };
         }
-
-
-
         private void Move(Vector3 orient)
         {
             inputOrient.Value = orient;
         }
+
+        
     }
 }

@@ -12,7 +12,7 @@ namespace TZ.Character.Jump
 
         protected override void AfterAwake()
         {
-            characterData=data as BaseCharacterData;
+            characterData = data as BaseCharacterData;
         }
         public abstract void Jump();
 	}

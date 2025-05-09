@@ -13,17 +13,27 @@ namespace TZ.Character.Data
         [SerializeField] public Transform model;
         [Tooltip("正交3d视角当中的真实坐标，非等距视角")]
         [ReadOnly]
-        [SerializeField] public Vector3 realPos;
+        [SerializeField] public DataWithEvent<Vector3> realPos;
 
         [Header("Move")]
         public DataWithEventHop canMove;
         public DataWithEvent<Vector3> inputOrient = new DataWithEvent<Vector3>();
-        public DataWithEvent<Vector3> worldOrient= new DataWithEvent<Vector3>();
 
-        [ContextMenu("Refresh")]
-        void RefreshMenu()
+        [Header("Jump/Fly")]
+        public bool isOnGround;
+
+        public override void AddDependence()
         {
-            realPos = model.position.ToRealVector();
+            realPos.onValueChange += (pos) => model.position = realPos.Value.ToIsoVector();
+            AddDependenceEx();
         }
+        public override void ClearDependence()
+        {
+            ClearDependenceEx();
+            realPos.onValueChange = delegate { };
+        }
+        public abstract void AddDependenceEx();
+        public abstract void ClearDependenceEx();
+
     }
 }
