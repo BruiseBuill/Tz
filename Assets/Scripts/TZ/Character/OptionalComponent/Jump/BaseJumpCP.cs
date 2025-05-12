@@ -9,6 +9,8 @@ namespace TZ.Character.Jump
 	public abstract class BaseJumpCP : BaseComponent
 	{
 		protected BaseCharacterData characterData;
+        [Header("Jump/Fly")]
+        protected bool isOnGround;
 
         protected override void AfterAwake()
         {

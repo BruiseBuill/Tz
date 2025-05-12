@@ -19,8 +19,7 @@ namespace TZ.Character.Data
         public DataWithEventHop canMove;
         public DataWithEvent<Vector3> inputOrient = new DataWithEvent<Vector3>();
 
-        [Header("Jump/Fly")]
-        public bool isOnGround;
+        
 
         public override void AddDependence()
         {
