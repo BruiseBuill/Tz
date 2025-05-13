@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BF.Tool;
 
 namespace BF
 {
@@ -22,6 +21,12 @@ namespace BF
         }
         void LoadAct(int index)
 		{
+#if UNITY_EDITOR
+			if (index >= actModeList.Count)
+			{
+				Debug.Log(index);
+			}
+#endif
 			actModeList[index].SetActMode();
             lastActModeIndex = index;
         }

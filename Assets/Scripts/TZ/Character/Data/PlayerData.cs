@@ -10,6 +10,7 @@ namespace TZ.Character.Data
 	{
 		[SerializeField] GenericEventChannel<Vector3> onMoveChannel;
 
+
         public override void Initialize<T>(T para)
         {
             model.position = Vector3.zero;

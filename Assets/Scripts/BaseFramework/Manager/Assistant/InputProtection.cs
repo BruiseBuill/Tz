@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BF
 {
-    #region InputProtection
     [Serializable]
     public class InputProtection
     {
@@ -13,43 +13,37 @@ namespace BF
         //Normally, action can only be done when condition=true and input
         //Advance: input before condition=true
         //Lag: input after condition=false
-        public Action<bool> onConditionChange = delegate { };
-        public Action onPlayerInput = delegate { };
-
         public Action onAct = delegate { };
 
-        public bool condition;
-        public float lastConditionTrueTime;
-        public bool hasInput;
-        public float lastInputTime;
+        [SerializeField] bool condition;
+        [ReadOnly]
+        [SerializeField] float lastConditionTrueTime;
+        [ReadOnly]
+        [SerializeField] bool hasInput;
+        [ReadOnly]
+        [SerializeField] float lastInputTime;
 
-        public float advanceProtectionTime;
-        public float lagProtectionTime;
+        [SerializeField] float advanceProtectionTime;
+        [SerializeField] float lagProtectionTime;
 
-        public void Initialize(float advanceProtectionTime, float lagProtectionTime)
+        public InputProtection()
         {
-            this.advanceProtectionTime = advanceProtectionTime;
-            this.lagProtectionTime = lagProtectionTime;
-
             condition = true;
             lastConditionTrueTime = Time.time;
             hasInput = false;
             lastInputTime = Time.time;
-
-            onPlayerInput += OnPlayerInput;
-            onConditionChange += OnConditionChange;
         }
-        void OnPlayerInput()
+        public void Input()
         {
             hasInput = true;
             lastInputTime = Time.time;
-            if (condition || Time.time - lastConditionTrueTime < lagProtectionTime)
+            if (condition && Time.time - lastConditionTrueTime < lagProtectionTime)
             {
                 hasInput = false;
                 onAct.Invoke();
             }
         }
-        void OnConditionChange(bool condition)
+        public void ChangeCondition(bool condition)
         {
             if (this.condition == condition)
             {
@@ -71,5 +65,5 @@ namespace BF
             }
         }
     }
-    #endregion
+    
 }
