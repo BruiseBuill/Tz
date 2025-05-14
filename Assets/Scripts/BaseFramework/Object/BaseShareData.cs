@@ -3,6 +3,9 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
+using System.Collections.Generic;
+
 
 namespace BF.Object
 {
@@ -13,6 +16,7 @@ namespace BF.Object
         public DataWithEvent<bool> isAlive;
 		public int _IdentityCode;
         public Sequece<BaseComponent> componentList;
+        public Dictionary<Type, SubData> subDataDic;
         
         bool isInitialized;
 
@@ -25,6 +29,7 @@ namespace BF.Object
             {
                 isInitialized = true;
                 componentList = new Sequece<BaseComponent>();
+                subDataDic = new Dictionary<Type, SubData>();
             }
         }
 

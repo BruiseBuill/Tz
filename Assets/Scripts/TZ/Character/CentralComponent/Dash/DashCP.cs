@@ -34,14 +34,13 @@ namespace TZ.Character.Dash
         {
 
         }
-
         public override void Close()
         {
 
         }
         public void Dash()
         {
-            //timer.CanUse()
+            timer.CanUse()
         }
         IEnumerator Updating()
         {

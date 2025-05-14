@@ -66,7 +66,7 @@ namespace TZ.ScriptableObject
         #endregion
         #region Dash
         [SerializeField] KeyCode dashCode;
-        [SerializeField] GenericEventChannel<bool> onDashInputChannel;
+        [SerializeField] GenericEventChannel<bool> onDashChangeConditionChannel;
         [SerializeField] InputProtection dashInput;
         [SerializeField] EventChannel onDashChannel;
         #endregion
@@ -86,12 +86,9 @@ namespace TZ.ScriptableObject
             InputManager.Instance().GetKeyEvent(rightCode, KeyCondition.Down) += () => IsRight = true;
             InputManager.Instance().GetKeyEvent(rightCode, KeyCondition.Up) += () => IsRight = false;
 
-
             InputManager.Instance().GetKeyEvent(dashCode, KeyCondition.Down) += dashInput.Input;
-            onDashInputChannel.AddListener(dashInput.ChangeCondition);
+            onDashChangeConditionChannel.AddListener(dashInput.ChangeCondition);
             dashInput.onAct += () => onDashChannel.Invoke();
-
-
         }
         public override void UnSetActMode()
         {
@@ -103,6 +100,10 @@ namespace TZ.ScriptableObject
             InputManager.Instance().GetKeyEvent(leftCode, KeyCondition.Up) = delegate { };
             InputManager.Instance().GetKeyEvent(rightCode, KeyCondition.Down) = delegate { };
             InputManager.Instance().GetKeyEvent(rightCode, KeyCondition.Up) = delegate { };
+
+            InputManager.Instance().GetKeyEvent(dashCode, KeyCondition.Down) = delegate { };
+            onDashChangeConditionChannel.RemoveListener(dashInput.ChangeCondition);
+            dashInput.onAct = delegate { };
         }
         void ChangeMove()
         {
