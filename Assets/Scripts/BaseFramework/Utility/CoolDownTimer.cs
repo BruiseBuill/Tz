@@ -9,9 +9,24 @@ namespace BF.Utility
     [Serializable]
     public class CoolDownTimer
     {
+        public Action<bool> timerConditionChange = delegate { };
+
+        //todo
+        public bool IsCoolingDown
+        {
+            get => isCoolingDown
+            set
+            {
+                if (isCoolingDown == value)
+                    return;
+                isCoolingDown = value;
+
+            }
+        }
+        public bool IsUsing;
         public bool isCoolingDown;
         public bool isUsing;
-
+        
         public float presentTime;
         public float coolDownTime;
         public float usingTime;
@@ -26,7 +41,7 @@ namespace BF.Utility
 
         public bool CanUse()
         {
-            if (isCoolingDown || isUsing)
+            if (IsCoolingDown || IsUsing)
             {
                 return false;
             }
@@ -53,23 +68,23 @@ namespace BF.Utility
         {
             if (usingTime > 0)
             {
-                isUsing = true;
+                IsUsing = true;
                 invokeTime = 0;
             }
 
             presentChargeCount--;
             if (presentChargeCount == 0)
             {
-                isCoolingDown = true;
+                IsCoolingDown = true;
             }
         }
         void UseNormalSkill()
         {
             if (usingTime > 0)
             {
-                isUsing = true;
+                IsUsing = true;
             }
-            isCoolingDown = true;
+            IsCoolingDown = true;
 
             presentTime = 0;
         }
@@ -86,12 +101,12 @@ namespace BF.Utility
         }
         void UpdateChargedSkill(float duration)
         {
-            if (isUsing)
+            if (IsUsing)
             {
                 invokeTime += duration;
                 if (invokeTime > usingTime)
                 {
-                    isUsing = false;
+                    IsUsing = false;
                 }
             }
             if (presentChargeCount < maxChargeCount)
@@ -101,7 +116,7 @@ namespace BF.Utility
                 {
                     presentTime -= coolDownTime;
                     presentChargeCount++;
-                    isCoolingDown = false;
+                    IsCoolingDown = false;
                     if (presentChargeCount == maxChargeCount)
                         presentTime = 0;
                 }
@@ -109,21 +124,21 @@ namespace BF.Utility
         }
         void UpdateNormalSkill(float duration)
         {
-            if (isUsing)
+            if (IsUsing)
             {
                 presentTime += duration;
                 if (presentTime > usingTime)
                 {
-                    isUsing = false;
+                    IsUsing = false;
                 }
             }
-            if (isCoolingDown)
+            if (IsCoolingDown)
             {
                 presentTime += duration;
                 if (presentTime > coolDownTime)
                 {
                     presentTime = 0;
-                    isCoolingDown = false;
+                    IsCoolingDown = false;
                 }
             }
         }

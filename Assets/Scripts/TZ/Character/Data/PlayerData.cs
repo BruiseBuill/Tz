@@ -13,9 +13,6 @@ namespace TZ.Character.Data
         [SerializeField] GenericEventChannel<bool> onDashChangeConditionChannel;
         [SerializeField] EventChannel onDashChannel;
 
-        public Action onDash = delegate { };
-        public Action<bool> onDashChangeCondition = delegate { };
-
         public override void Initialize<T>(T para)
         {
             model.position = Vector3.zero;
@@ -28,13 +25,17 @@ namespace TZ.Character.Data
         {
             onMoveChannel.AddListener(Move);
             onDashChannel.AddListener(Dash);
-            onDashChangeCondition+= (con) => onDashChangeConditionChannel.Invoke(con);
+
+            var dashData = GetSubData<SubDashData>();
+            dashData.onDashChangeCondition += (con) => onDashChangeConditionChannel.Invoke(con);
         }
         public override void ClearDependenceEx()
         {
             onMoveChannel.RemoveListener(Move);
             onDashChannel.RemoveListener(Dash);
-            onDashChangeCondition = delegate { };
+
+            var dashData = GetSubData<SubDashData>();
+            dashData.onDashChangeCondition = delegate { };
         }
         private void Move(Vector3 orient)
         {
@@ -42,7 +43,8 @@ namespace TZ.Character.Data
         }
         void Dash()
         {
-            onDash.Invoke();
+            var dashData = GetSubData<SubDashData>();
+            dashData.onDash.Invoke();
         }
         
     }
