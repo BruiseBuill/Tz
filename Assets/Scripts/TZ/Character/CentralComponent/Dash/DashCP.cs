@@ -5,44 +5,51 @@ using System.Collections;
 using System.Collections.Generic;
 using TZ.Character.Data;
 using UnityEngine;
+using DG.Tweening;
 
 namespace TZ.Character.Dash
 {
     public class DashCP : BaseComponent
     {
         BaseCharacterData characterData;
-        SubDashData subDashData;
+        SubDashData dashData;
 
         [SerializeField] CoolDownTimer timer;
-        [SerializeField] float dashSpeed;
-        [SerializeField] float dashTime;
-
-        [SerializeField] GameObject shadowPrefab;
-        [SerializeField] int shadowCount;
-        [SerializeField] float shadowLifeTime;
 
         protected override void AfterAwake()
         {
             characterData = data as BaseCharacterData;
-            subDashData = characterData.GetSubData<SubDashData>();            
+            dashData = characterData.GetSubData<SubDashData>();
+
+            timer.usingTime = dashData.dashDuration;
         }
         public override void Open()
         {
-            subDashData.onDash += Dash;
-
+            dashData.onDash += Dash;
+            timer.onTimerConditionChange += dashData.onDashChangeCondition;
         }
         public override void AfterOpen()
         {
-
+            StartCoroutine("Updating");
         }
         public override void Close()
         {
-            subDashData.onDash -= Dash;
+            dashData.onDash -= Dash;
+            timer.onTimerConditionChange -= dashData.onDashChangeCondition;
         }
         public void Dash()
         {
             timer.Use();
-            StartCoroutine("Updating");
+            
+            characterData.canMove.Value = false;
+
+            var aimPos = characterData.realPos.Value + characterData.faceOrient * dashData.dashSpeed * dashData.dashDuration;
+            var dashTween = DOTween.To(() => characterData.realPos.Value, (pos) => characterData.realPos.Value = pos, aimPos, dashData.dashDuration)
+            .SetEase(dashData.dashCurve)
+            .OnComplete(() =>
+            {
+                characterData.canMove.Value = true;
+            });
         }
         IEnumerator Updating()
         {
@@ -52,7 +59,5 @@ namespace TZ.Character.Dash
                 timer.Update(Time.deltaTime);
             }
         }
-
-
     }
 }

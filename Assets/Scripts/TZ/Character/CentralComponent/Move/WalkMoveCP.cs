@@ -15,6 +15,17 @@ namespace TZ.Character.Move
         public override void Open()
         {
             characterData.inputOrient.onValueChange += Move;
+            characterData.canMove.onValueChange += (canMove) =>
+            {
+                if (canMove)
+                {
+                    StartCoroutine("Moving");
+                }
+                else
+                {
+                    StopCoroutine("Moving");
+                }
+            };
         }
         public override void AfterOpen()
         {

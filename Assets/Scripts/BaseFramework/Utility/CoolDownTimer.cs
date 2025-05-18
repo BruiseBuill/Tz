@@ -9,25 +9,34 @@ namespace BF.Utility
     [Serializable]
     public class CoolDownTimer
     {
-        public Action<bool> timerConditionChange = delegate { };
+        public Action<bool> onTimerConditionChange = delegate { };
 
-        //todo
-        public bool IsCoolingDown
+        protected bool IsCoolingDown
         {
-            get => isCoolingDown
+            get => isCoolingDown;
             set
             {
                 if (isCoolingDown == value)
                     return;
                 isCoolingDown = value;
-
+                onTimerConditionChange.Invoke(CanUse());
             }
         }
-        public bool IsUsing;
-        public bool isCoolingDown;
-        public bool isUsing;
-        
-        public float presentTime;
+        protected bool IsUsing
+        {
+            get => isUsing;
+            set
+            {
+                if (isUsing == value)
+                    return;
+                isUsing = value;
+                onTimerConditionChange.Invoke(CanUse());
+            }
+        }
+        [SerializeField] protected bool isCoolingDown;
+        [SerializeField] protected bool isUsing;
+
+        [SerializeField] protected float presentTime;
         public float coolDownTime;
         public float usingTime;
 
