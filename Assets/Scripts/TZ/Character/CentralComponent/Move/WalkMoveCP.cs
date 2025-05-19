@@ -56,7 +56,7 @@ namespace TZ.Character.Move
         {
             while (characterData.canMove.Value)
             {
-                characterData.realPos.Value += moveOrient * walkSpeed * Time.deltaTime;
+                characterData.totalForce += moveOrient * walkSpeed;
                 yield return null;
             }
         }

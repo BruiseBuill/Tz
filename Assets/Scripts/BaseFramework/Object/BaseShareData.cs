@@ -62,6 +62,7 @@ namespace BF.Object
             {
                 componentList[i].AfterOpen();
             }
+            AfterOpenEx();
         }
         public void Close()
         {
@@ -91,7 +92,7 @@ namespace BF.Object
             }
         }
         #endregion
-        
+        protected abstract void AfterOpenEx();
         #region Close
         void CloseComponentList()
         {

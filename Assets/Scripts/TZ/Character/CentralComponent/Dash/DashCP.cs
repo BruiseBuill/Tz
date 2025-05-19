@@ -43,8 +43,14 @@ namespace TZ.Character.Dash
             
             characterData.canMove.Value = false;
 
-            var aimPos = characterData.realPos.Value + characterData.faceOrient * dashData.dashSpeed * dashData.dashDuration;
-            var dashTween = DOTween.To(() => characterData.realPos.Value, (pos) => characterData.realPos.Value = pos, aimPos, dashData.dashDuration)
+            var dashSpeed = 0f;
+            var dashTween = DOTween.To(() => dashSpeed, 
+                (s) => 
+                { 
+                    dashSpeed = s; 
+                    characterData.totalForce += dashSpeed * characterData.faceOrient; 
+                },
+                dashData.dashSpeed, dashData.dashDuration)
             .SetEase(dashData.dashCurve)
             .OnComplete(() =>
             {
