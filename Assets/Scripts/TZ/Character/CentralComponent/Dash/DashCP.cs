@@ -43,15 +43,15 @@ namespace TZ.Character.Dash
             
             characterData.canMove.Value = false;
 
-            var dashSpeed = 0f;
-            var dashTween = DOTween.To(() => dashSpeed, 
+            var animationStart = 0f;
+            var animationEnd = 1f;
+            var dashTween = DOTween.To(() => animationStart, 
                 (s) => 
-                { 
-                    dashSpeed = s; 
-                    characterData.totalForce += dashSpeed * characterData.faceOrient; 
+                {
+                    characterData.totalForce += dashData.dashCurve.Evaluate(s) * characterData.faceOrient;
                 },
-                dashData.dashSpeed, dashData.dashDuration)
-            .SetEase(dashData.dashCurve)
+                animationEnd, dashData.dashDuration)
+            .SetEase(Ease.Linear)
             .OnComplete(() =>
             {
                 characterData.canMove.Value = true;
