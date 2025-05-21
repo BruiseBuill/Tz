@@ -29,15 +29,15 @@ namespace BF
         public InputProtection()
         {
             condition = true;
-            lastConditionTrueTime = Time.time;
+            lastConditionTrueTime = 0f;
             hasInput = false;
-            lastInputTime = Time.time;
+            lastInputTime = 0f;
         }
         public void Input()
         {
             hasInput = true;
             lastInputTime = Time.time;
-            if (condition && Time.time - lastConditionTrueTime < lagProtectionTime)
+            if (condition || Time.time - lastConditionTrueTime < lagProtectionTime)
             {
                 hasInput = false;
                 onAct.Invoke();

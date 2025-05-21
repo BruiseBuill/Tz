@@ -29,11 +29,11 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
+    - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - SingularityGroup.HotReload.Runtime
     - SingularityGroup.HotReload.Editor
     - PsdPlugin
-    - Assembly-CSharp
     - PPv2URPConverters
     - Febucci.TextAnimator.Runtime
     - SingularityGroup.HotReload.Runtime.Public

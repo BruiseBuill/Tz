@@ -133,9 +133,13 @@ namespace BF.Utility
         }
         void UpdateNormalSkill(float duration)
         {
-            if (IsUsing)
+            if (IsUsing|| IsCoolingDown)
             {
                 presentTime += duration;
+            }
+
+            if (IsUsing)
+            {
                 if (presentTime > usingTime)
                 {
                     IsUsing = false;
@@ -143,10 +147,8 @@ namespace BF.Utility
             }
             if (IsCoolingDown)
             {
-                presentTime += duration;
                 if (presentTime > coolDownTime)
                 {
-                    presentTime = 0;
                     IsCoolingDown = false;
                 }
             }

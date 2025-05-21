@@ -39,19 +39,26 @@ namespace TZ.Character.Dash
         }
         public void Dash()
         {
+            //Lag Input
+            if (!timer.CanUse())
+            {
+                return;
+            }
             timer.Use();
             
             characterData.canMove.Value = false;
 
             var animationStart = 0f;
             var animationEnd = 1f;
+            var dashOri = characterData.faceOrient;
             var dashTween = DOTween.To(() => animationStart, 
                 (s) => 
                 {
-                    characterData.totalForce += dashData.dashCurve.Evaluate(s) * characterData.faceOrient;
+                    animationStart = s;
+                    Debug.Log(s);
+                    characterData.totalForce += dashData.dashCurve.Evaluate(s) * dashData.dashSpeed * dashOri;
                 },
                 animationEnd, dashData.dashDuration)
-            .SetEase(Ease.Linear)
             .OnComplete(() =>
             {
                 characterData.canMove.Value = true;

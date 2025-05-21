@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using TZ.Utility;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace TZ.Character.Data
@@ -37,8 +38,13 @@ namespace TZ.Character.Data
         {
             inputOrient.onValueChange += (orient) =>
             {
-                if (orient != Vector3.zero)
+                if (orient != Vector3.zero && canMove.Value)
                     faceOrient = orient;
+            };
+            canMove.onValueChange += (canMove) =>
+            {
+                if(canMove)
+                    faceOrient = inputOrient.Value;
             };
             AddDependenceEx();
         }
@@ -46,6 +52,7 @@ namespace TZ.Character.Data
         {
             ClearDependenceEx();
             inputOrient.onValueChange = delegate { };
+            canMove.onValueChange = delegate { };
         }
         public abstract void AddDependenceEx();
         public abstract void ClearDependenceEx();

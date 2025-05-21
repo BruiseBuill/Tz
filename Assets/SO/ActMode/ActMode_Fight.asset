@@ -17,3 +17,13 @@ MonoBehaviour:
   leftCode: 97
   rightCode: 100
   onMoveChannel: {fileID: 11400000, guid: 5890507b8cb1f3b4eac6caa0587e9047, type: 2}
+  dashCode: 112
+  onDashChangeConditionChannel: {fileID: 11400000, guid: f1797863bad42824eaea7ea4e70bae95, type: 2}
+  dashInput:
+    condition: 1
+    lastConditionTrueTime: 23.682198
+    hasInput: 0
+    lastInputTime: 23.682198
+    advanceProtectionTime: 0.2
+    lagProtectionTime: 0.2
+  onDashChannel: {fileID: 11400000, guid: 1f9335fd0bd538347a6a8b035d4f607c, type: 2}

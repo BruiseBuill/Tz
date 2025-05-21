@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace BF.Utility
 {
@@ -140,10 +142,12 @@ namespace BF.Utility
                     return;
                 }
             }
+            list.Add(new Node(t, value));
         }
         public void Remove(T t)
         {
-            for(int i = 0; i < list.Count; i++)
+            UnityEngine.Debug.Log(list.Count);
+            for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].data.Equals(t))
                 {
@@ -153,6 +157,7 @@ namespace BF.Utility
         }
         public void Clear()
         {
+            UnityEngine.Debug.Log(list.Count);
             list.Clear();
         }
         public int Count => list.Count;
