@@ -14,7 +14,6 @@ namespace BF.Object
         {
             data = GetComponentInChildren<BaseShareData>();
             data.Register(this, priority);
-            Debug.Log(1);
             AfterAwake();
         }
         /// <summary>

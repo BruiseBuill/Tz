@@ -85,7 +85,6 @@ namespace BF.Object
         public abstract void AddDependence();
         void OpenComponentList()
         {
-            Debug.Log(componentList.Count);
             for (int i = 0; i < componentList.Count; i++)
             {
                 componentList[i].Open();

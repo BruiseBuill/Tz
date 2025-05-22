@@ -43,7 +43,7 @@ namespace TZ.Character.Data
             };
             canMove.onValueChange += (canMove) =>
             {
-                if(canMove)
+                if (canMove && inputOrient.Value != Vector3.zero) 
                     faceOrient = inputOrient.Value;
             };
             AddDependenceEx();

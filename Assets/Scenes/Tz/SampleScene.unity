@@ -4201,19 +4201,19 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.2
+      time: 0.15
       value: 1
-      inSlope: 0.00000024245958
-      outSlope: 0.00000024245958
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 1
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.8
+      time: 0.85
       value: 1
-      inSlope: -0.00000030436416
-      outSlope: -0.00000030436416
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
@@ -4230,7 +4230,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dashDuration: 0.6
+  dashDuration: 0.3
 --- !u!1 &2037200559
 GameObject:
   m_ObjectHideFlags: 0
