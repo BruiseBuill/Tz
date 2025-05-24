@@ -23,5 +23,9 @@ namespace BF.EventChannel
 		{
             onEvent -= action;
         }
+		public void RemoveAllListener()
+		{
+            onEvent = delegate { };
+        }
     }
 }

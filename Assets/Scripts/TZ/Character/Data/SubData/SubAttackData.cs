@@ -1,11 +1,16 @@
+using BF.Object;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Test
+namespace TZ.Character.Data
 {
-	public class SubAttackData : MonoBehaviour
+	public class SubAttackData : SubData
 	{
+		public Action onAttack = delegate { };
+		public Action<bool> onAttackChangeCondition = delegate { };
+
 		
-	}
+    }
 }

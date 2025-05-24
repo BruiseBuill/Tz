@@ -32,13 +32,14 @@ namespace BF.Object
 
                 subDataDic = new Dictionary<Type, SubData>();
                 var subs = GetComponentsInChildren<SubData>();
-                foreach (var sub in subs )
+                foreach (var sub in subs)
                 {
                     subDataDic.Add(sub.GetType(), sub);
                 }
-                //AwakeEx();
+                AwakeEx();
             }
         }
+        protected abstract void AwakeEx();
         /// <summary>
         /// 对于一些只需要初始化内存一次的字段进行初始化,包括subDataDic
         /// </summary>
